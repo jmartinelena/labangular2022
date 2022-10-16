@@ -36,7 +36,12 @@ export class DeleteComponent implements OnInit {
       error: err => {
         //console.log(err);
         this.showError = true;
-        this.errorMessage = err.error.Error;
+        if (err.error.Error == null) {
+          this.errorMessage = 'Se rompio la conexion a base de datos: \n' + err.message;
+        }
+        else {
+          this.errorMessage = err.error.Error;
+        }
       }
     })
   }

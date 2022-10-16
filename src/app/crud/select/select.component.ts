@@ -18,6 +18,8 @@ export class SelectComponent implements OnInit {
   showEmployee: boolean = false;
   errorMessage: string = '';
   showError: boolean = false;
+  cantConnect: boolean = false;
+  cantConnectMessage: string = 'Se rompio la conexion con la base de datos.';
 
   invalidId() {
     return this.formSelectById.get('id')?.invalid && (this.formSelectById.get('id')?.dirty || this.formSelectById.get('id')?.touched);
@@ -41,15 +43,27 @@ export class SelectComponent implements OnInit {
       //console.log(err);
       this.showEmployee = false;
       this.showError = true;
-      this.errorMessage = err.error.Error;
+      if (err.error.Error == null) {
+        this.errorMessage = 'Se rompio la conexion a base de datos: \n' + err.message;
+      }
+      else {
+        this.errorMessage = err.error.Error;
+      }
     }})
   }
 
   getAll() {
-    this.employeeService.getEmployees().subscribe(res => {
+    this.employeeService.getEmployees().subscribe({
+      next: res => {
       this.employeeList = res;
       //console.log(this.employeeList);
-    })
+    },
+    error: err => {
+      //console.log(err);
+      this.cantConnect = true;
+      this.cantConnectMessage = 'Se rompio la conexion a base de datos: \n' + err.message;
+    }
+  })
   }
 
 }
