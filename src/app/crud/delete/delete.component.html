@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
         <h1>Eliminar un empleado por ID</h1>
-        <form [formGroup]="formDelete" (ngSubmit)="deleteById()">
+        <form [formGroup]="formDelete" (ngSubmit)="deleteById(formDelete.value.id)">
             <div class="form-group">
                 <label for="id" class="form-label">ID: </label>
                 <input type="text" formControlName="id" id="id" class="form-control">
@@ -12,5 +12,9 @@
             <br>
             <button type="submit" class="btn btn-primary" [disabled]="formDelete.get('id')?.invalid">Borrar</button>
         </form>
+        <br>
+        <div class="alert alert-danger" *ngIf="showError">
+            {{errorMessage}}
+        </div>
     </div>
 </div>

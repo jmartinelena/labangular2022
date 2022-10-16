@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
         <h1>Actualizar un empleado existente</h1>
-        <form [formGroup]="formUpdate" (ngSubmit)="sendForm()">
+        <form [formGroup]="formUpdate" (ngSubmit)="sendForm(formUpdate.value.id, formUpdate.value.lname, formUpdate.value.fname)">
             <div class="form-group">
                 <label for="id" class="form-label">ID: </label>
                 <input type="text" formControlName="id" id="id" class="form-control">
@@ -27,5 +27,9 @@
             <br>
             <button type="submit" class="btn btn-primary" [disabled]="buttonIsDisabled()">Enviar</button>
         </form>
+        <br>
+        <div class="alert alert-danger" *ngIf="showError">
+            {{errorMessage}}
+        </div>
     </div>
 </div>

@@ -1,10 +1,26 @@
 <div class="row">
     <div class="col">
-        <h1>Traer todos los empleados</h1>
+        <h1>Todos los empleados</h1>
+        <table class="table table-dark table-striped table-border">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employeeList">
+                    <td>{{employee.Id}}</td>
+                    <td>{{employee.LastName}}</td>
+                    <td>{{employee.FirstName}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="col">
         <h1>Traer un empleado por ID</h1>
-        <form [formGroup]="formSelectById" (ngSubmit)="getById()">
+        <form [formGroup]="formSelectById" (ngSubmit)="getById(formSelectById.value.id)">
             <div class="form-group">
                 <label for="id" class="form-label">ID: </label>
                 <input type="text" formControlName="id" id="id" class="form-control">
@@ -15,5 +31,25 @@
             <br>
             <button type="submit" class="btn btn-primary" [disabled]="formSelectById.get('id')?.invalid">Traer</button>
         </form>
+        <br>
+        <table class="table table-dark table-striped table-border" *ngIf="showEmployee">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Apellido</th>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{employeeById.Id}}</td>
+                    <td>{{employeeById.LastName}}</td>
+                    <td>{{employeeById.FirstName}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-danger" *ngIf="showError">
+            {{errorMessage}}
+        </div>
     </div>
 </div>
