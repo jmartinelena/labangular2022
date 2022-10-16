@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col">
+        <h1>Eliminar un empleado por ID</h1>
+        <form [formGroup]="formDelete" (ngSubmit)="deleteById()">
+            <div class="form-group">
+                <label for="id" class="form-label">ID: </label>
+                <input type="text" formControlName="id" id="id" class="form-control">
+                <div *ngIf="invalidId()" class="alert alert-danger">
+                    El id debe ser un numero entero y mayor a cero.
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" [disabled]="formDelete.get('id')?.invalid">Borrar</button>
+        </form>
+    </div>
+</div>

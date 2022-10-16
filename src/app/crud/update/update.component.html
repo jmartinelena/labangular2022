@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col">
+        <h1>Actualizar un empleado existente</h1>
+        <form [formGroup]="formUpdate" (ngSubmit)="sendForm()">
+            <div class="form-group">
+                <label for="id" class="form-label">ID: </label>
+                <input type="text" formControlName="id" id="id" class="form-control">
+                <div *ngIf="invalidId()" class="alert alert-danger">
+                    El id debe ser un numero entero y mayor a cero.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lname" class="form-label">Apellido: </label>
+                <input type="text" formControlName="lname" id="lname" class="form-control">
+                <div *ngIf="invalidLname()" class="alert alert-danger">
+                    El apellido debe tener entre 1 y 20 caracteres.
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="fname" class="form-label">Nombre: </label>
+                <input type="text" formControlName="fname" id="fname" class="form-control">
+                <div *ngIf="invalidFname()" class="alert alert-danger">
+                    El nombre debe tener entre 1 y 10 caracteres.
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" [disabled]="buttonIsDisabled()">Enviar</button>
+        </form>
+    </div>
+</div>

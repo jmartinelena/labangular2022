@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col">
+        <h1>Insertar un empleado nuevo</h1>
+        <form [formGroup]="formInsert" (ngSubmit)="sendForm()">
+            <div class="form-group">
+                <label for="lname" class="form-label">Apellido: </label>
+                <input type="text" formControlName="lname" id="lname" class="form-control">
+                <div *ngIf="invalidLname()" class="alert alert-danger">
+                    El apellido debe tener entre 1 y 20 caracteres.
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="fname" class="form-label">Nombre: </label>
+                <input type="text" formControlName="fname" id="fname" class="form-control">
+                <div *ngIf="invalidFname()" class="alert alert-danger">
+                    El nombre debe tener entre 1 y 10 caracteres.
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" [disabled]="formInsert.get('lname')?.invalid || formInsert.get('fname')?.invalid">Enviar</button>
+        </form>
+    </div>
+</div>

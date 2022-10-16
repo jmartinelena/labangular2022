@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col">
+        <h1>Traer todos los empleados</h1>
+    </div>
+    <div class="col">
+        <h1>Traer un empleado por ID</h1>
+        <form [formGroup]="formSelectById" (ngSubmit)="getById()">
+            <div class="form-group">
+                <label for="id" class="form-label">ID: </label>
+                <input type="text" formControlName="id" id="id" class="form-control">
+                <div *ngIf="invalidId()" class="alert alert-danger">
+                    El id debe ser un numero entero y mayor a cero.
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" [disabled]="formSelectById.get('id')?.invalid">Traer</button>
+        </form>
+    </div>
+</div>
